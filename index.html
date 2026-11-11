@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AssetFlow — IT Asset Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand"><span class="brand-mark">A</span><span>assetflow</span></div>
+        <nav class="nav" aria-label="Primary navigation">
+          <a class="nav-item active" href="#overview" data-view="overview"><span class="nav-icon">▦</span>Overview</a>
+          <a class="nav-item" href="#assets" data-view="assets"><span class="nav-icon">▤</span>Assets <span class="nav-count" id="sidebarAssetCount">—</span></a>
+          <a class="nav-item" href="#lifecycle" data-view="lifecycle"><span class="nav-icon">↗</span>Lifecycle</a>
+          <a class="nav-item" href="#requests" data-view="requests"><span class="nav-icon">◌</span>Requests <span class="nav-count alert" id="sidebarRequestCount">—</span></a>
+          <a class="nav-item" href="#reports" data-view="reports"><span class="nav-icon">◫</span>Reports</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <a class="nav-item" href="#settings" data-view="settings"><span class="nav-icon">⚙</span>Settings</a>
+          <div class="profile" id="profileButton" role="button" tabindex="0" aria-label="Open Priya Mehta profile">
+            <div class="avatar">PM</div>
+            <div><strong id="profileName">Priya Mehta</strong><small id="profileRole">IT Operations</small></div>
+            <button class="dots" aria-label="Profile options">•••</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content" id="dashboard">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="currentDate"></p>
+            <h1>Good morning, <span id="greetingName">Priya</span> <span class="wave">✦</span></h1>
+          </div>
+          <div class="top-actions">
+            <button class="icon-button" aria-label="Notifications">♧<span class="notification-dot"></span></button>
+            <button class="icon-button" aria-label="Help">?</button>
+            <button class="primary-button" id="addAssetButton"><span>+</span> Add asset</button>
+          </div>
+        </header>
+
+        <div id="overviewContent">
+        <section class="stats-grid" aria-label="Asset statistics">
+          <article class="stat-card"><div class="stat-top"><span class="stat-label">TOTAL ASSETS</span><span class="stat-icon blue">▤</span></div><strong id="totalAssets" aria-live="polite">—</strong><p><span class="trend neutral">●</span> Live inventory count</p></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-label">ASSIGNED</span><span class="stat-icon violet">♙</span></div><strong id="assignedAssets" aria-live="polite">—</strong><p><span class="trend neutral">●</span> Currently in use</p></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-label">IN STOCK</span><span class="stat-icon green">□</span></div><strong id="stockAssets" aria-live="polite">—</strong><p><span class="trend neutral">●</span> Available to assign</p></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-label">REQUIRES ACTION</span><span class="stat-icon orange">!</span></div><strong id="actionAssets" aria-live="polite">—</strong><p><span class="trend neutral">●</span> Items under repair</p></article>
+        </section>
+
+        <section class="content-grid">
+          <section class="panel category-panel">
+            <div class="panel-heading"><div><h2>Asset categories</h2><p>Distribution across your organization</p></div><button class="text-button">View all <span>→</span></button></div>
+            <div class="categories">
+              <div class="category-row"><div class="category-icon coral">▣</div><div class="category-info"><strong>Computers</strong><span id="computersCount">Loading…</span></div><div class="bar-track"><i id="computersBar"></i></div><b id="computersPercent">—</b></div>
+              <div class="category-row"><div class="category-icon yellow">▱</div><div class="category-info"><strong>Mobile devices</strong><span id="mobileCount">Loading…</span></div><div class="bar-track"><i id="mobileBar"></i></div><b id="mobilePercent">—</b></div>
+              <div class="category-row"><div class="category-icon violet">▤</div><div class="category-info"><strong>Peripherals</strong><span id="peripheralsCount">Loading…</span></div><div class="bar-track"><i id="peripheralsBar"></i></div><b id="peripheralsPercent">—</b></div>
+              <div class="category-row"><div class="category-icon teal">⌁</div><div class="category-info"><strong>Network</strong><span id="networkCount">Loading…</span></div><div class="bar-track"><i id="networkBar"></i></div><b id="networkPercent">—</b></div>
+            </div>
+          </section>
+
+          <section class="panel action-panel">
+            <div class="panel-heading"><div><h2>Needs attention</h2><p>Items that need a decision</p></div><span class="pill" id="attentionCount">Loading…</span></div>
+            <div class="attention-list">
+              <div class="attention-item"><span class="attention-symbol amber">!</span><div><strong>Assets in repair</strong><p id="repairAttention">Loading…</p></div><button class="chevron">›</button></div>
+              <div class="attention-item"><span class="attention-symbol red">×</span><div><strong>Unassigned assets</strong><p id="unassignedAttention">Loading…</p></div><button class="chevron">›</button></div>
+              <div class="attention-item"><span class="attention-symbol purple">↗</span><div><strong>Active assets</strong><p id="activeAttention">Loading…</p></div><button class="chevron">›</button></div>
+            </div>
+          </section>
+        </section>
+
+        <section class="panel assets-panel" id="assets">
+          <div class="panel-heading assets-heading"><div><h2>Recent assets</h2><p>Latest updates across your inventory</p></div><div class="table-actions"><label class="search"><span>⌕</span><input id="assetSearch" type="search" placeholder="Search assets" /></label><button class="filter-button">≡ Filter</button><button class="text-button">View all <span>→</span></button></div></div>
+          <div class="table-wrap"><table><thead><tr><th>ASSET</th><th>ASSIGNED TO</th><th>STATUS</th><th>LAST UPDATED</th><th></th></tr></thead><tbody id="assetTableBody"></tbody></table></div>
+        </section>
+        </div>
+        <section id="secondaryView" class="secondary-view" hidden aria-live="polite"></section>
+      </main>
+    </div>
+
+    <dialog id="assetDialog">
+      <form method="dialog" id="assetForm">
+        <div class="modal-head"><div><p class="eyebrow">INVENTORY</p><h2>Add new asset</h2></div><button class="close-button" value="cancel" aria-label="Close">×</button></div>
+        <div class="upload-zone" id="uploadZone"><span>↑</span><strong>Drop an invoice or image here</strong><small>Optional · PDF, PNG or JPG</small><input id="fileInput" type="file" accept=".pdf,image/*" /></div>
+        <div class="form-grid"><label>Asset name<input name="name" required placeholder="e.g. MacBook Pro 14”" /></label><label>Asset tag<input name="tag" required placeholder="e.g. AF-0249" /></label><label>Category<select name="category"><option>Computers</option><option>Mobile devices</option><option>Peripherals</option><option>Network</option></select></label><label>Assigned to<input name="owner" placeholder="Unassigned" /></label></div>
+        <div class="modal-actions"><button value="cancel" class="secondary-button">Cancel</button><button class="primary-button" value="default">Add to inventory</button></div>
+      </form>
+    </dialog>
+    <script src="app.js"></script>
+  </body>
+</html>
